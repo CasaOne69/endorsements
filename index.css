@@ -1,4 +1,142 @@
 html, body {
     margin: 0;
     padding: 0;
+    background: black;
+    margin-top: 15px;
+    text-align: center;
+    user-select: none;
+    font-family: Inter;
+}
+h1 {
+    font-family: Inter;
+    color:white;
+}
+h2 {
+    font-family: Inter;
+    color:white;
+}
+.headimg {
+    text-align: center;
+    max-height: 150px;
+    
+}
+
+.endtxt {
+    height: 90%;
+    width: 90%;
+    background: none;
+    border: none;
+    color: white;
+    margin-top: 5px;
+    outline: none;
+    align-content: top;
+}
+
+.end-box {
+    width: 320px;
+    height: 120px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: #444059;
+    text-align: center;
+    margin: auto;
+    color: #8F8F8F;
+    font-family: Inter;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    font-size: 16px;
+}
+.lower {
+display:flex;
+padding: 15px;
+width: 320px;
+text-align: center;
+margin-left: auto;
+margin-right:auto;
+
+}
+
+input[type=text] {
+    color: white;
+    background-color: #444059;
+    font-family: Inter;
+    font: 20px;
+    text-align: center;
+    line-height: 2;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    border-radius: 8px;
+    width: 155px;
+    
+}
+::placeholder {
+    color: white;
+    opacity: 1;
+}
+.end-from{
+    font-size: 20px;
+    text-align: left;
+    padding: 5px;
+    font-weight: 600;
+    font-size: 15px;
+    font-family: Inter;
+    width:320px;
+}
+.from {
+    width:155px;
+    margin-right: 10px;
+ }
+ .toto {
+    width: 155px;px;
+ }
+button {
+    width: 317px;
+    height: 61px;
+    color: #04131C;
+    text-align: center;
+    font-family: Inter;
+    font-size: 25px;
+    font-weight: 700;
+    border-radius: 8px;
+    background: #28A9F1;
+}
+
+
+.contents {
+    background-color: aliceblue;
+    width:320px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+    color: black;
+    font-family: Inter;
+    line-height: normal;
+    border-radius: 8px;
+}
+
+.to-name {
+    font-size: 20px;
+    text-align: left;
+    padding: 5px;
+    font-weight: 700;
+    font-size: 16px;
+    font-family: Inter;
+    margin-bottom: -25px;
+}
+
+.end-content {
+    text-align: left;
+    font-size: 16px;
+    font-family: Inter;
+    padding:10px;
+}
+.heartico {
+    height: 20px;
+    float: right;
+    margin-right: 25px;
+    margin-top:-30px;
 }
