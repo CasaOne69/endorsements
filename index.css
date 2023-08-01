@@ -118,17 +118,16 @@ button {
     border-radius: 8px;
 }
 
-.to-name {
+.toandfrom {
     font-size: 20px;
     text-align: left;
     padding: 5px;
     font-weight: 700;
     font-size: 16px;
     font-family: Inter;
-    margin-bottom: -25px;
 }
 
-.end-content {
+.thetext {
     text-align: left;
     font-size: 16px;
     font-family: Inter;
@@ -150,4 +149,24 @@ button {
     text-align: center;
     color:crimson;
     text-shadow: 2px 2px 4px grey;
+}
+
+ul {
+    list-style: none;
+  padding: 0;
+    
+}
+
+li {
+    background-color: aliceblue;
+    width:320px;
+    margin-bottom: 15px;
+    color: black;
+    font-family: Inter;
+    line-height: normal;
+    border-radius: 8px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding:10px;   
 }
