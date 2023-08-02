@@ -35,20 +35,25 @@ onValue(everything, function (snapshot) {
         let currentItem = toFetchedFromDb[i]
         let currentItemID = currentItem[0]
         let currentItemValue = currentItem[1]
-        console.log(IDFromDb[i])
+        
 
         //conversion to create element and not inner.html
         let newEl = document.createElement("li") 
         newEl.innerHTML = `<p class="toandfrom">${currentItem.to}</p>
         <p class="thetext">${currentItem.text}</p>
         <p class="toandfrom">${currentItem.from}</p>
-        <p><img src="/assets/heartico.png" class="heartico"><p class="heart-count" id="counter-el" placeholder="0">${currentItem.clicks}</p></p>`
+        <p><img src="/assets/heartico.png" class="heartico"><p class="heart-count" id="counter-el" placeholder="0">${currentItem.clicky}</p></p>`
         ulEl.append(newEl)
 
         //function for like counter
         newEl.addEventListener("click", function(){
-            console.log("cunt")
-            update(clicks)
+            clicks += +1
+            let updates = {
+                clicky: clicks
+            }
+          
+            let exactLocationOfClickCount = ref(database , `endorsement/${IDFromDb}`)
+            update(exactLocationOfClickCount, updates)
         })
         
          
@@ -67,7 +72,7 @@ publishBtn.addEventListener("click", function () {
         text: endorsementTXT,
         to: endorsementTo,
         from: endorsementFrom,
-        clicks: clickTotals,
+        clicky: clickTotals,
     };
     push(everything, dataToPush);
 });
