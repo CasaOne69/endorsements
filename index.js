@@ -9,6 +9,10 @@ const app = initializeApp(appSettings)
 const database = getDatabase(app) 
 const everything = ref(database, "endorsement")
 
+//variable for the counter
+let clicks = 0
+let hasClicked = false
+
 //Elements from dom
 const endorseEl = document.getElementById("endoreElbox")
 const fromEl = document.getElementById("from-name")
@@ -17,9 +21,7 @@ const publishBtn = document.getElementById("publish-endorsement")
 const ulEl = document.getElementById("ul-el")
 const counterEl = document.getElementById("counter-el")
 
-//variable for the counter
-let clicks = 0
-let hasClicked = false
+
 
 //function to retrieve the items from the DB and render them to the DOM
 onValue(everything, function (snapshot) {
@@ -33,7 +35,7 @@ onValue(everything, function (snapshot) {
         <p class="toandfrom">${currentItem.to}</p>
         <p class="thetext">${currentItem.text}</p>
         <p class="toandfrom">${currentItem.from}</p>
-        <p><img src="/assets/heartico.png" class="heartico"><p class="heart-count">${clicks}</p></p>
+        <p><img src="/assets/heartico.png" class="heartico"><p class="heart-count" id="counter-el" placeholder="0">${clicks}</p></p>
         </li>`;
     }
 });
@@ -57,18 +59,14 @@ function clearprevious() {
     ulEl.innerHTML = "";
 }
 
+
 //counter function
-counterEl.addEventListener("click", function(){
-    
-        if(!hasClicked)
-        {
-           clicks += 1;
-           counterEl.innerHTML = clicks
-           hasClicked = true
-        }
+function countUp() {
+    if(!hasClicked)
+    {
+       clicks += 1;
+       counterEl.innerHTML = clicks
+       hasClicked = true
+    }
 
-
-
-
-})
-
+}
