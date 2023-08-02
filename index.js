@@ -15,6 +15,11 @@ const fromEl = document.getElementById("from-name")
 const toEl = document.getElementById("to-el")
 const publishBtn = document.getElementById("publish-endorsement")
 const ulEl = document.getElementById("ul-el")
+const counterEl = document.getElementById("counter-el")
+
+//variable for the counter
+let clicks = 0
+let hasClicked = false
 
 //function to fetch input values, turn it in to an obbject and push to DB
 publishBtn.addEventListener("click", function () {
@@ -36,7 +41,12 @@ publishBtn.addEventListener("click", function () {
         for (let i = 0; i < toFetchedFromDb.length; i++) {
             let currentItem = toFetchedFromDb[i]
             
-            ulEl.innerHTML += `<li>${currentItem.to}</li>`;
+            ulEl.innerHTML += `<li>
+            <p class="toandfrom">${currentItem.to}</p>
+            <p class="thetext">${currentItem.text}</p>
+            <p class="toandfrom">${currentItem.from}</p>
+            <p><img src="/assets/heartico.png" class="heartico"><p class="heart-count">6969</p></p>
+            </li>`;
         }
     
 
@@ -44,11 +54,23 @@ publishBtn.addEventListener("click", function () {
 
 });
 
-//function appendItemToListEl(itemValue) {
-    //ulEl.innerHTML += `<li>${itemValue}</li>`;
-//}
-
 //function to clear what is already on the page, to avoid duplication
 function clearprevious() {
     ulEl.innerHTML = "";
 }
+
+//counter function
+counterEl.addEventListener("click", function(){
+    
+        if(!hasClicked)
+        {
+           clicks += 1;
+           counterEl.innerHTML = clicks
+           hasClicked = true
+        }
+
+
+
+
+})
+
