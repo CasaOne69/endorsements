@@ -59,8 +59,6 @@ function clearprevious() {
 
 //counter function
 counterEl.addEventListener("click", function(){
-    let clicks = 0
-let hasClicked = false
     
         if(!hasClicked)
         {
