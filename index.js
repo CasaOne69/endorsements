@@ -35,7 +35,7 @@ publishBtn.addEventListener("click", function () {
 
     //function to retrieve the TO items from the DB
     onValue(everything, function (snapshot) {
-        clearprevious();
+       // clearprevious();
         let toFetchedFromDb = Object.values(snapshot.val());
 
         for (let i = 0; i < toFetchedFromDb.length; i++) {
@@ -45,7 +45,7 @@ publishBtn.addEventListener("click", function () {
             <p class="toandfrom">${currentItem.to}</p>
             <p class="thetext">${currentItem.text}</p>
             <p class="toandfrom">${currentItem.from}</p>
-            <p><img src="/assets/heartico.png" class="heartico"><p class="heart-count">6969</p></p>
+            <p><img src="/assets/heartico.png" class="heartico"><p class="heart-count">${clicks}</p></p>
             </li>`;
         }
     
