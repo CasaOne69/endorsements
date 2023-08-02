@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"
-import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
+import { getDatabase, ref, push, onValue, update, child } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
 
 //Firebase connections
 const appSettings = {
@@ -8,6 +8,8 @@ const appSettings = {
 const app = initializeApp(appSettings) 
 const database = getDatabase(app) 
 const everything = ref(database, "endorsement")
+
+
 
 //variable for the counter
 let clicks = 0
@@ -27,10 +29,13 @@ const counterEl = document.getElementById("counter-el")
 onValue(everything, function (snapshot) {
     clearprevious();
     let toFetchedFromDb = Object.values(snapshot.val());
+    let IDFromDb = Object.keys(snapshot.val());
 
     for (let i = 0; i < toFetchedFromDb.length; i++) {
         let currentItem = toFetchedFromDb[i]
-
+        let currentItemID = currentItem[0]
+        let currentItemValue = currentItem[1]
+        console.log(IDFromDb[i])
 
         //conversion to create element and not inner.html
         let newEl = document.createElement("li") 
@@ -40,8 +45,13 @@ onValue(everything, function (snapshot) {
         <p><img src="/assets/heartico.png" class="heartico"><p class="heart-count" id="counter-el" placeholder="0">${currentItem.clicks}</p></p>`
         ulEl.append(newEl)
 
-
-      
+        //function for like counter
+        newEl.addEventListener("click", function(){
+            console.log("cunt")
+            update(clicks)
+        })
+        
+         
     }
 });
 
@@ -67,5 +77,3 @@ publishBtn.addEventListener("click", function () {
 function clearprevious() {
     ulEl.innerHTML = "";
 }
-
-
