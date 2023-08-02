@@ -7,48 +7,48 @@ const appSettings = {
 }
 const app = initializeApp(appSettings) 
 const database = getDatabase(app) 
-const endorsementsInDB = ref(database, "endorsement/text")
-const toInDB = ref(database, "endorsement/to")
-const fromInDB = ref(database, "endorsement/from")
+const everything = ref(database, "endorsement")
 
 //Elements from dom
 const endorseEl = document.getElementById("endoreElbox")
 const fromEl = document.getElementById("from-name")
 const toEl = document.getElementById("to-el")
 const publishBtn = document.getElementById("publish-endorsement")
-const toReturnEl = document.getElementById("main-end-el")
-const theWholeLot = document.getElementById("thewholelot")
+const ulEl = document.getElementById("ul-el")
 
-//function to fetch input values and push to DB
-publishBtn.addEventListener ("click", function (){
-    let endorsementTXT = `${endorseEl.value}`
-    let endorsementTo = `To ${toEl.value}`
-    let endorsementFrom = `From ${fromEl.value}`
-    push(fromInDB, endorsementFrom)
-    push(toInDB, endorsementTo) 
-    push(endorsementsInDB, endorsementTXT) 
-   
-    //function to retrive the TO items from the DB
-    onValue(toInDB, function(snapshot){
-        let toFetchedFromDb = Object.values(snapshot.val())
-        clearprevious()
+//function to fetch input values, turn it in to an obbject and push to DB
+publishBtn.addEventListener("click", function () {
+    let endorsementTXT = `${endorseEl.value}`;
+    let endorsementTo = `To ${toEl.value}`;
+    let endorsementFrom = `From ${fromEl.value}`;
+    let dataToPush = {
+        text: endorsementTXT,
+        to: endorsementTo,
+        from: endorsementFrom,
+    }
+            push(everything, dataToPush)
+
+    //function to retrieve the TO items from the DB
+    onValue(everything, function (snapshot) {
+        clearprevious();
+        let toFetchedFromDb = Object.values(snapshot.val());
+
         for (let i = 0; i < toFetchedFromDb.length; i++) {
+            let currentItem = toFetchedFromDb[i]
+            
+            ulEl.innerHTML += `<li>${currentItem.to}</li>`;
+        }
+    
 
-        appendItemToListEl(toFetchedFromDb[i])
-    })
-    //function to retrive the FROM items from the DB
-    onValue(fromInDB, function(snapshot){
-        let fromFetchedFromDb = Object.values(snapshot.val())
-        clearprevious()
-        for (let i = 0; i < fromFetchedFromDb.length; i++) {
+    });
 
-        appendItemToListEl(fromFetchedFromDb[i])
-          })
+});
 
-function appendItemToListEl(itemValue) {
-    theWholeLot.innerHTML += `<li>${itemValue}</li>`
-}
-//fucntion to clear what is already on page, to avoid duplication
+//function appendItemToListEl(itemValue) {
+    //ulEl.innerHTML += `<li>${itemValue}</li>`;
+//}
+
+//function to clear what is already on the page, to avoid duplication
 function clearprevious() {
-    theWholeLot.innerHTML = ""  
+    ulEl.innerHTML = "";
 }
