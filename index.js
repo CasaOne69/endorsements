@@ -21,7 +21,24 @@ const counterEl = document.getElementById("counter-el")
 let clicks = 0
 let hasClicked = false
 
-//function to fetch input values, turn it in to an obbject and push to DB
+//function to retrieve the items from the DB and render them to the DOM
+onValue(everything, function (snapshot) {
+    clearprevious();
+    let toFetchedFromDb = Object.values(snapshot.val());
+
+    for (let i = 0; i < toFetchedFromDb.length; i++) {
+        let currentItem = toFetchedFromDb[i]
+            
+        ulEl.innerHTML += `<li>
+        <p class="toandfrom">${currentItem.to}</p>
+        <p class="thetext">${currentItem.text}</p>
+        <p class="toandfrom">${currentItem.from}</p>
+        <p><img src="/assets/heartico.png" class="heartico"><p class="heart-count">${clicks}</p></p>
+        </li>`;
+    }
+});
+
+//function to fetch input values, turn it into an object, and push to DB
 publishBtn.addEventListener("click", function () {
     let endorsementTXT = `${endorseEl.value}`;
     let endorsementTo = `To ${toEl.value}`;
@@ -30,29 +47,10 @@ publishBtn.addEventListener("click", function () {
         text: endorsementTXT,
         to: endorsementTo,
         from: endorsementFrom,
-    }
-            push(everything, dataToPush)
-
-    //function to retrieve the TO items from the DB
-    onValue(everything, function (snapshot) {
-       // clearprevious();
-        let toFetchedFromDb = Object.values(snapshot.val());
-
-        for (let i = 0; i < toFetchedFromDb.length; i++) {
-            let currentItem = toFetchedFromDb[i]
-            
-            ulEl.innerHTML += `<li>
-            <p class="toandfrom">${currentItem.to}</p>
-            <p class="thetext">${currentItem.text}</p>
-            <p class="toandfrom">${currentItem.from}</p>
-            <p><img src="/assets/heartico.png" class="heartico"><p class="heart-count">${clicks}</p></p>
-            </li>`;
-        }
-    
-
-    });
-
+    };
+    push(everything, dataToPush);
 });
+
 
 //function to clear what is already on the page, to avoid duplication
 function clearprevious() {
@@ -61,6 +59,8 @@ function clearprevious() {
 
 //counter function
 counterEl.addEventListener("click", function(){
+    let clicks = 0
+let hasClicked = false
     
         if(!hasClicked)
         {
