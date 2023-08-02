@@ -30,25 +30,34 @@ onValue(everything, function (snapshot) {
 
     for (let i = 0; i < toFetchedFromDb.length; i++) {
         let currentItem = toFetchedFromDb[i]
-            
-        ulEl.innerHTML += `<li>
-        <p class="toandfrom">${currentItem.to}</p>
+
+
+        //conversion to create element and not inner.html
+        let newEl = document.createElement("li") 
+        newEl.innerHTML = `<p class="toandfrom">${currentItem.to}</p>
         <p class="thetext">${currentItem.text}</p>
         <p class="toandfrom">${currentItem.from}</p>
-        <p><img src="/assets/heartico.png" class="heartico"><p class="heart-count" id="counter-el" placeholder="0">${clicks}</p></p>
-        </li>`;
+        <p><img src="/assets/heartico.png" class="heartico"><p class="heart-count" id="counter-el" placeholder="0">${currentItem.clicks}</p></p>`
+        ulEl.append(newEl)
+
+
+      
     }
 });
+
+
 
 //function to fetch input values, turn it into an object, and push to DB
 publishBtn.addEventListener("click", function () {
     let endorsementTXT = `${endorseEl.value}`;
     let endorsementTo = `To ${toEl.value}`;
     let endorsementFrom = `From ${fromEl.value}`;
+    let clickTotals = clicks
     let dataToPush = {
         text: endorsementTXT,
         to: endorsementTo,
         from: endorsementFrom,
+        clicks: clickTotals,
     };
     push(everything, dataToPush);
 });
@@ -60,13 +69,3 @@ function clearprevious() {
 }
 
 
-//counter function
-function countUp() {
-    if(!hasClicked)
-    {
-       clicks += 1;
-       counterEl.innerHTML = clicks
-       hasClicked = true
-    }
-
-}
