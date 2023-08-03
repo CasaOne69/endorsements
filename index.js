@@ -57,6 +57,7 @@ onValue(everything, function (snapshot) {
     }
 });
 
+
 //function to fetch input values, turn it into an object, and push to DB
 publishBtn.addEventListener("click", function () {
     let endorsementTXT = `${endorseEl.value}`;
