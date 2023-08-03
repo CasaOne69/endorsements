@@ -12,7 +12,7 @@ const everything = ref(database, "endorsement")
 
 
 //variable for the counter
-let clicks = 0
+let clicks = 0;
 let hasClicked = false
 
 //Elements from dom
@@ -25,6 +25,9 @@ const counterEl = document.getElementById("counter-el")
 
 
 
+
+
+
 //function to retrieve the items from the DB and render them to the DOM
 onValue(everything, function (snapshot) {
     clearprevious();
@@ -33,8 +36,8 @@ onValue(everything, function (snapshot) {
 
     for (let i = 0; i < toFetchedFromDb.length; i++) {
         let currentItem = toFetchedFromDb[i]
-        let currentItemID = currentItem[0]
-        let currentItemValue = currentItem[1]
+        //let currentItemID = currentItem[0]
+        //let currentItemValue = currentItem[1]
         
 
         //conversion to create element and not inner.html
@@ -42,23 +45,17 @@ onValue(everything, function (snapshot) {
         newEl.innerHTML = `<p class="toandfrom">${currentItem.to}</p>
         <p class="thetext">${currentItem.text}</p>
         <p class="toandfrom">${currentItem.from}</p>
-        <p><img src="/assets/heartico.png" class="heartico"><p class="heart-count" id="counter-el" placeholder="0">${currentItem.clicky}</p></p>`
+        <p><img src="/assets/heartico.png" class="heartico"><p class="counter" id="counter-el" placeholder="0">${currentItem.clicky}</p></p>`
         ulEl.append(newEl)
 
-        //function for like counter
-        newEl.addEventListener("click", function(){
-            clicks += +1
-            let updates = {
-                clicky: clicks
-            }
-          
-            let exactLocationOfClickCount = ref(database , `endorsement/${IDFromDb}`)
-            update(exactLocationOfClickCount, updates)
-        })
-        
+    
          
     }
 });
+
+///make a function to update the value of the counter and update the return to dom to use it and then after update it in the db
+
+
 
 
 
@@ -67,7 +64,8 @@ publishBtn.addEventListener("click", function () {
     let endorsementTXT = `${endorseEl.value}`;
     let endorsementTo = `To ${toEl.value}`;
     let endorsementFrom = `From ${fromEl.value}`;
-    let clickTotals = clicks
+    let clickTotals = 0
+    
     let dataToPush = {
         text: endorsementTXT,
         to: endorsementTo,
@@ -82,3 +80,4 @@ publishBtn.addEventListener("click", function () {
 function clearprevious() {
     ulEl.innerHTML = "";
 }
+
