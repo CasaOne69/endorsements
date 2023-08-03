@@ -21,10 +21,6 @@ const fromEl = document.getElementById("from-name")
 const toEl = document.getElementById("to-el")
 const publishBtn = document.getElementById("publish-endorsement")
 const ulEl = document.getElementById("ul-el")
-const counterEl = document.getElementById("counter-el")
-
-
-
 
 
 
@@ -36,9 +32,8 @@ onValue(everything, function (snapshot) {
 
     for (let i = 0; i < toFetchedFromDb.length; i++) {
         let currentItem = toFetchedFromDb[i]
-        //let currentItemID = currentItem[0]
-        //let currentItemValue = currentItem[1]
         
+
 
         //conversion to create element and not inner.html
         let newEl = document.createElement("li") 
@@ -48,16 +43,19 @@ onValue(everything, function (snapshot) {
         <p><img src="/assets/heartico.png" class="heartico"><p class="counter" id="counter-el" placeholder="0">${currentItem.clicky}</p></p>`
         ulEl.append(newEl)
 
-    
+        newEl.addEventListener("click", function(){
+            clicks += +1
+            let updates = {
+                clicky: clicks
+            }
+          
+            let exactLocationOfClickCount = ref(database , `endorsement/${IDFromDb}`)
+            update(exactLocationOfClickCount, updates)
+        })
+
          
     }
 });
-
-///make a function to update the value of the counter and update the return to dom to use it and then after update it in the db
-
-
-
-
 
 //function to fetch input values, turn it into an object, and push to DB
 publishBtn.addEventListener("click", function () {
