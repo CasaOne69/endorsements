@@ -40,7 +40,7 @@ onValue(everything, function (snapshot) {
         newEl.innerHTML = `<p class="toandfrom">${currentItem.to}</p>
         <p class="thetext">${currentItem.text}</p>
         <p class="toandfrom">${currentItem.from}</p>
-        <p><img src="/assets/heartico.png" class="heartico"><p class="counter" id="counter-el" placeholder="0">${currentItem.clicky}</p></p>`
+        <p><img src="assets/heartico.png" class="heartico"><p class="counter" id="counter-el" placeholder="0">${currentItem.clicky}</p></p>`
         ulEl.append(newEl)
 
         newEl.addEventListener("click", function(){
